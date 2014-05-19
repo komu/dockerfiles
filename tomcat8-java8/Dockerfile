@@ -16,7 +16,7 @@ RUN rm /tmp/catalina.tar.gz
 # Remove unneeded apps
 RUN rm -rf /opt/tomcat/webapps/examples
 RUN rm -rf /opt/tomcat/webapps/docs
-#RUN rm -rf /opt/tomcat/webapps/ROOT
+RUN rm -rf /opt/tomcat/webapps/ROOT
 
 ADD tomcat-users.xml /opt/apache-tomcat-${TOMCAT_VERSION}/conf/
 
