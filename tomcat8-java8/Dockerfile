@@ -20,9 +20,6 @@ RUN rm -rf /opt/tomcat/webapps/ROOT
 
 ADD tomcat-users.xml /opt/apache-tomcat-${TOMCAT_VERSION}/conf/
 
-# Replace "random" with "urandom" for quicker startups
-RUN sudo rm /dev/random && sudo ln -s /dev/urandom /dev/random
-
 # Preserve webapps and logs across restarts
 VOLUME ["/opt/tomcat-${TOMCAT_VERSION}/webapps", "/opt/tomcat-${TOMCAT_VERSION}/logs"]
 
