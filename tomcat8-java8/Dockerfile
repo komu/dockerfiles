@@ -10,7 +10,7 @@ RUN wget --quiet --no-cookies http://archive.apache.org/dist/tomcat/tomcat-8/v${
 
 # Unpack
 RUN tar xzf /tmp/catalina.tar.gz -C /opt
-RUN ln -s /opt/apache-tomcat-${TOMCAT_VERSION} /opt/tomcat
+RUN mv /opt/apache-tomcat-${TOMCAT_VERSION} /opt/tomcat
 RUN rm /tmp/catalina.tar.gz
 
 # Remove unneeded apps
@@ -18,10 +18,10 @@ RUN rm -rf /opt/tomcat/webapps/examples
 RUN rm -rf /opt/tomcat/webapps/docs
 RUN rm -rf /opt/tomcat/webapps/ROOT
 
-ADD tomcat-users.xml /opt/apache-tomcat-${TOMCAT_VERSION}/conf/
+ADD tomcat-users.xml /opt/tomcat/conf/
 
 # Preserve webapps and logs across restarts
-VOLUME ["/opt/tomcat-${TOMCAT_VERSION}/webapps", "/opt/tomcat-${TOMCAT_VERSION}/logs"]
+VOLUME ["/opt/tomcat/webapps", "/opt/tomcat/logs"]
 
 ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
