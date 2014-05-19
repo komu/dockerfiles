@@ -23,8 +23,8 @@ ADD tomcat-users.xml /opt/apache-tomcat-${TOMCAT_VERSION}/conf/
 # Replace "random" with "urandom" for quicker startups
 RUN sudo rm /dev/random && sudo ln -s /dev/urandom /dev/random
 
-# The following volumes should not be considered part of the image, but contain runtime data
-VOLUME ["/opt/tomcat/webapps"]
+# Preserve webapps and logs across restarts
+VOLUME ["/opt/tomcat-${TOMCAT_VERSION}/webapps", "/opt/tomcat-${TOMCAT_VERSION}/logs"]
 
 ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
