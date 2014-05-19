@@ -20,9 +20,6 @@ RUN rm -rf /opt/tomcat/webapps/ROOT
 
 ADD tomcat-users.xml /opt/tomcat/conf/
 
-# Preserve webapps and logs across restarts
-VOLUME ["/opt/tomcat/webapps", "/opt/tomcat/logs"]
-
 ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
 
