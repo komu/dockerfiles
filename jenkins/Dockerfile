@@ -43,6 +43,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq git
 # Install Jenkins
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq jenkins
 
+# Clean-up to reduce the image size
+RUN apt-get clean
+
 VOLUME /var/lib/jenkins
 ENV JENKINS_HOME /var/lib/jenkins
 
