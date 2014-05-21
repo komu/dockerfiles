@@ -31,7 +31,7 @@ ENV JAVA7_HOME /usr/lib/jvm/java-7-oracle
 ENV JAVA8_HOME /usr/lib/jvm/java-8-oracle
 
 # Download Jenkins
-ADD http://mirrors.jenkins-ci.org/war/1.563/jenkins.war /opt/jenkins.war
+ADD http://mirrors.jenkins-ci.org/war/1.564/jenkins.war /opt/jenkins.war
 
 ENV JENKINS_HOME /jenkins
 
