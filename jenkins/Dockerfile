@@ -49,7 +49,6 @@ RUN apt-get clean
 VOLUME /var/lib/jenkins
 ENV JENKINS_HOME /var/lib/jenkins
 
-USER jenkins
 ENTRYPOINT ["java", "-jar", "/usr/share/jenkins/jenkins.war"]
 EXPOSE 8080
 CMD [""]
