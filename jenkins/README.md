@@ -1,10 +1,12 @@
 [Jenkins](http://jenkins-ci.org/) running on Java 8.
 
-Following tools are installed on the system and environment variables are defined for their locations:
+Following tools are installed on the system:
 
-  - Java 6 (JAVA6_HOME)
-  - Java 7 (JAVA7_HOME)
-  - Java 8 (JAVA8_HOME, JAVA_HOME)
+  - Java 6 (environment variable: JAVA6_HOME)
+  - Java 7 (environment variable: JAVA7_HOME)
+  - Java 8 (environment variable: JAVA8_HOME, JAVA_HOME)
+  - Git
+  - Docker
 
 Running:
 

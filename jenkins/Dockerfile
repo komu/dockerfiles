@@ -4,11 +4,16 @@ MAINTAINER juha.komulainen@evident.fi
 
 # First make sure the base system is up-to-date
 RUN apt-get update
-RUN apt-get -y upgrade
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq upgrade
 
-# First add a repository containing Java 8
-ADD webupd8team-java.list /etc/apt/sources.list.d/
+# Add repositories for Java and Jenkins
+RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" > /etc/apt/sources.list.d/webupd8team-java.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886
+
+ADD jenkins-ci.org.key /tmp/jenkins-ci.org.key
+RUN echo "deb http://pkg.jenkins-ci.org/debian binary/" > /etc/apt/sources.list.d/jenkins.list
+RUN apt-key add /tmp/jenkins-ci.org.key
+
 RUN apt-get update
 
 # Accept the Java licenses
@@ -17,9 +22,7 @@ RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true 
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
 # Install different Java versions
-RUN apt-get -y install oracle-java6-installer
-RUN apt-get -y install oracle-java7-installer
-RUN apt-get -y install oracle-java8-installer
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq oracle-java6-installer oracle-java7-installer oracle-java8-installer
 
 # Ensure Java 8 is the default version
 RUN update-java-alternatives -s java-8-oracle
@@ -30,12 +33,20 @@ ENV JAVA6_HOME /usr/lib/jvm/java-6-oracle
 ENV JAVA7_HOME /usr/lib/jvm/java-7-oracle
 ENV JAVA8_HOME /usr/lib/jvm/java-8-oracle
 
-# Download Jenkins
-ADD http://mirrors.jenkins-ci.org/war/1.564/jenkins.war /opt/jenkins.war
+# Install Docker
+RUN apt-get -y install docker.io
+RUN ln -sf /usr/bin/docker.io /usr/local/bin/docker
 
-ENV JENKINS_HOME /jenkins
+# Install Git
+RUN apt-get -y install git
 
-ENTRYPOINT ["java", "-jar", "/opt/jenkins.war"]
+# Install Jenkins
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq jenkins
+
+VOLUME /var/lib/jenkins
+ENV JENKINS_HOME /var/lib/jenkins
+
+USER jenkins
+ENTRYPOINT ["java", "-jar", "/usr/share/jenkins/jenkins.war"]
 EXPOSE 8080
-VOLUME ["/jenkins"]
 CMD [""]
