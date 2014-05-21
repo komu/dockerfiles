@@ -34,11 +34,11 @@ ENV JAVA7_HOME /usr/lib/jvm/java-7-oracle
 ENV JAVA8_HOME /usr/lib/jvm/java-8-oracle
 
 # Install Docker
-RUN apt-get -y install docker.io
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq docker.io
 RUN ln -sf /usr/bin/docker.io /usr/local/bin/docker
 
 # Install Git
-RUN apt-get -y install git
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq git
 
 # Install Jenkins
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq jenkins
