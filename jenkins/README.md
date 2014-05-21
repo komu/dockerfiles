@@ -10,4 +10,4 @@ Following tools are installed on the system:
 
 Running:
 
-    docker run -p 8080:8080 -v /path/to/jenkins/home:/jenkins komu/jenkins
+    docker run -p 8080:8080 -v /path/to/jenkins/home:/var/lib/jenkins komu/jenkins
