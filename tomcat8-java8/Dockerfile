@@ -4,7 +4,7 @@ MAINTAINER juha.komulainen@evident.fi
 
 EXPOSE 8080
 
-ENV TOMCAT_VERSION 8.0.5
+ENV TOMCAT_VERSION 8.0.12
 
 RUN wget --quiet --no-cookies http://archive.apache.org/dist/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -O /tmp/catalina.tar.gz
 
